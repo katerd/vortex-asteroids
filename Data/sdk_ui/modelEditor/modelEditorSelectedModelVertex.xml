@@ -1,0 +1,11 @@
+<gui version="1">
+    <window name="modelEditorSelectedModelVertex" size="200,80" anchor="right,top" padding="320,10,0,0">
+        <label size="130,18" anchor="right"><text>Selected Vertex</text></label>
+
+        <label position="8,22"><text>Position</text></label>
+        <textbox name="modelVertexX" position="10,40" size="50,18" />
+        <textbox name="modelVertexY" position="65,40" size="50,18" />
+        <textbox name="modelVertexZ" position="120,40" size="50,18" />
+
+    </window>
+</gui>

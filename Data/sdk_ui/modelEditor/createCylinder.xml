@@ -1,0 +1,11 @@
+<gui version="1">
+    <window name="createCylinderWindow" size="120,120" anchor="horizontalMiddle,verticalMiddle">
+        <label position="5,5"><text>Create Cylinder</text></label>
+
+        <label position="0,35"><text>Faces</text></label>
+        <textbox name="txtFaces" position="80,30" size="30,32"><text>6</text></textbox>
+
+        <button name="btnCancel" position="10,70" size="50,30"><label>Cancel</label></button>
+        <button name="btnCreate" position="60,70" size="50,30"><label>Create</label></button>
+    </window>
+</gui>
