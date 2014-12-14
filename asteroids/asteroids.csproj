@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsteroidsWindow.cs" />
-    <Compile Include="Components\Destructible.cs" />
+    <Compile Include="Components\Asteroid.cs" />
     <Compile Include="Components\HudController.cs" />
     <Compile Include="Components\KillAfterDuration.cs" />
     <Compile Include="Components\BulletMovement.cs" />

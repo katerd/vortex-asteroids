@@ -5,7 +5,7 @@ using Vortex.Scenegraph.Components.Collision;
 
 namespace asteroids.Components
 {
-    public class Destructible : ScriptComponent
+    public class Asteroid : ScriptComponent
     {
         public float Hitpoints { get; set; }
         public int Size { get; set; }

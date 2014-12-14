@@ -4,7 +4,6 @@ using Vortex.Core.Assets;
 using Vortex.Core.Collision;
 using Vortex.Graphics;
 using Vortex.Graphics.Enums;
-using Vortex.Graphics.Shaders;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
@@ -22,8 +21,6 @@ namespace asteroids.Spawners
             position = new Vector3(-30, 0, 0);
 
             ship.LocalPosition = position;
-
-            
 
             ship.CreateComponent<RigidbodyComponent>(component =>
             {
@@ -43,7 +40,7 @@ namespace asteroids.Spawners
 
             var weaponPort = scene.CreateEntity();
             weaponPort.Parent = mesh.Entity;
-            weaponPort.LocalPosition = new Vector3(-radius, 0, 0);
+            //weaponPort.LocalPosition = new Vector3(-radius, 0, 0);
             weaponPort.CreateComponent<WeaponPort>();
 
             var lightAttachPoint = scene.CreateEntity();

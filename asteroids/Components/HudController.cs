@@ -10,13 +10,6 @@ namespace asteroids.Components
         public LabelWidgetComponent StatusLabel { get; set; }
         public ImageWidgetComponent ShipHealth { get; set; }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            FindShipDefenceComponent();
-        }
-
         public override void OnUpdate(float delta)
         {
             base.OnUpdate(delta);

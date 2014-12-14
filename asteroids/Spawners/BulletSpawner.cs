@@ -13,6 +13,7 @@ namespace asteroids.Spawners
         public static void SpawnIn(Scene scene, Vector3 position, float angle, float bulletLife, float bulletSpeed, int damage)
         {
             var bullet = ColladaUtils.CreateEntity(scene, @"Models\bullet.dae");
+
             bullet.LocalPosition = position;
 
             var bulletMovement = new BulletMovement
@@ -28,8 +29,7 @@ namespace asteroids.Spawners
             var projectile = new Projectile { BaseDamage = damage };
             bullet.AddComponent(projectile);
 
-            bullet.CreateComponent<SphereColliderComponent>(component => component.Radius = 0.1f);
-
+            bullet.CreateComponent<SphereColliderComponent>(component => component.Radius = 0.8f);
         }
     }
 }

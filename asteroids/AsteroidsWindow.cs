@@ -64,7 +64,7 @@ namespace asteroids
 
         private void SetSceneLighting()
         {
-            GraphicsContext.ClearColour = new Color4(1.0f, 0.01f, 0.21f, 0.21f);
+            GraphicsContext.ClearColour = new Color4(1.0f, 0, 0.01f, 0.02f);
 
             Scene.AmbientLight = new Color4(1.0f, 0.5f, 0.5f, 0.5f);
 

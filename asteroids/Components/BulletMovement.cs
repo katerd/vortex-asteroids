@@ -8,13 +8,10 @@ namespace asteroids.Components
         public Vector3 MovementVector { get; set; }
         public float MovementSpeed { get; set; }
 
-        public override void OnFrame(double delta)
+        public override void OnUpdate(float delta)
         {
-            base.OnFrame(delta);
-
-            Entity.LocalPosition += (MovementVector*MovementSpeed*(float)delta);
+            base.OnUpdate(delta);
+            Entity.LocalPosition += (MovementVector * MovementSpeed * delta);
         }
-
-        
     }
 }

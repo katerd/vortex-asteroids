@@ -44,7 +44,7 @@ namespace asteroids.Spawners
             var asteroid = scene.CreateEntity(GetModelFilename(size), true);
             asteroid.LocalPosition = worldPosition;
 
-            asteroid.CreateComponent<Destructible>(destructible =>
+            asteroid.CreateComponent<Asteroid>(destructible =>
             {
                 destructible.Hitpoints = 100 * size;
                 destructible.Size = size;

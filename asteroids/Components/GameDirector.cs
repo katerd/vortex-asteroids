@@ -28,7 +28,7 @@ namespace asteroids.Components
 
         private void SpawnAsteroids()
         {
-            var asteroidCount = 30 + (int) (CurrentLevel*4f);
+            var asteroidCount = 5 + (int) (CurrentLevel*4f);
 
             for (var i = 0; i < asteroidCount; i++)
             {
@@ -57,7 +57,7 @@ namespace asteroids.Components
             InvokeDelayed(DoPreLevel, 3);
         }
 
-        public void AsteroidDestroyed(Destructible destructible)
+        public void AsteroidDestroyed(Asteroid asteroid)
         {
             AsteroidCount = Scene.GetActiveAsteroidCount();
         }
