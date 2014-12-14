@@ -1,5 +1,6 @@
 ﻿using asteroids.Components;
 using SlimMath;
+using Vortex.Core.Assets;
 using Vortex.Core.Collision;
 using Vortex.Graphics;
 using Vortex.Graphics.Enums;
@@ -36,7 +37,7 @@ namespace asteroids.Spawners
 
             // todo: this stuff shouldn't be done outside the scenegraph construction.
             var mesh = ship.GetComponentInSelfOrChildren<MeshComponent>();
-            mesh.Material = GetShipMaterial();
+            mesh.Material = StaticAssetLoader.GetInstance<Material>("Materials/ship.material");
 
             var radius = mesh.WorldBoundingSphere().Radius;
 
@@ -58,20 +59,6 @@ namespace asteroids.Spawners
 
             ship.CreateComponent<ShipDefence>();
             ship.CreateComponent<SphereColliderComponent>(component => component.Radius = 1);
-        }
-
-        private static Material GetShipMaterial()
-        {
-            var shipMaterial = Material.Get("shipMaterial");
-
-            if (shipMaterial != null)
-                return shipMaterial;
-
-            shipMaterial = Material.Create("shipMaterial", Shader.Get("sdk_shaders/defaultAmbient.shader"));
-            shipMaterial.SetColor4("matDiffuse", new Color4(1.0f, 1.0f, 1.0f, 1.0f));
-            shipMaterial.SetColor4("matAmbient", new Color4(1.0f, 1.0f, 1.0f, 1.0f));
-
-            return shipMaterial;
         }
     }
 }

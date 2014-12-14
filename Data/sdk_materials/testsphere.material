@@ -1,0 +1,25 @@
+{
+	Name "TestSphere"
+	Shader "sdk_shaders/defaultAmbient.shader"
+	
+	Properties
+	[
+		{
+			Name tex0
+			Type Texture2D
+			Value "sdk_textures/UV.jpg"
+		}
+		
+		{
+			Name matDiffuse
+			Type Color4
+			Value [1.0 0.4 0.4 0.4]
+		}
+		
+		{
+			Name matAmbient
+			Type Color4
+			Value [1 0.2 0.2 0.2]
+		}
+	]
+}

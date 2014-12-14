@@ -1,0 +1,19 @@
+{
+	Name "Collada Default Material"
+	Shader "sdk_shaders/defaultAmbient.shader"
+	
+	Properties
+	[
+		{
+			Name "matDiffuse"
+			Type Color4
+			Value [1.0 0.5 0.5 0.5]
+		}
+		
+		{
+			Name "matAmbient"
+			Type Color4
+			Value [1.0 0.5 0.5 0.5]
+		}
+	]
+}
