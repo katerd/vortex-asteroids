@@ -8,7 +8,7 @@ namespace asteroids.Extensions
     {
         public static int GetActiveAsteroidCount(this Scene scene)
         {
-            return scene.EntitiesWithComponent<Asteroid>().Count();
+            return scene.GetEntitiesWithComponent<Asteroid>().Count();
         }
     }
 }

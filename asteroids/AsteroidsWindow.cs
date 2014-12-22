@@ -2,7 +2,6 @@
 using asteroids.Spawners;
 using SlimMath;
 using Vortex.Bootstrap;
-using Vortex.Graphics.Enums;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Gui;
 
@@ -22,13 +21,13 @@ namespace asteroids
             var hudControllerEntity = Scene.CreateEntity("hud_controller_entity");
             hudControllerEntity.CreateComponent<HudController>(component =>
             {
-                component.ShipHealth = Scene.EntityByName("shiphealth_entity").GetComponent<ImageWidgetComponent>();
-                component.StatusLabel = Scene.EntityByName("label_entity").GetComponent<LabelWidgetComponent>();
-                component.GameDirector = Scene.EntityWithComponent<GameDirector>().GetComponent<GameDirector>();
+                component.ShipHealth = Scene.GetEntityByName("shiphealth_entity").GetComponent<ImageWidgetComponent>();
+                component.StatusLabel = Scene.GetEntityByName("label_entity").GetComponent<LabelWidgetComponent>();
             });
 
             var root = new GuiRootComponent();
             hudControllerEntity.AddComponent(root);
+            
             var labelEntity = Scene.CreateEntity("label_entity");
             labelEntity.Parent = hudControllerEntity;
             labelEntity.CreateComponent<LabelWidgetComponent>();
@@ -41,6 +40,7 @@ namespace asteroids
                 component.ImageName = "Textures/healthbar.png";
                 component.Size = new Vector2(200, 20);
             });
+
 
             var camera = Scene.CreateEntity("camera");
 

@@ -1,7 +1,5 @@
 ﻿using Vortex.Bootstrap;
 using Vortex.Core;
-using Vortex.Core.Assets;
-using Vortex.Core.Assets.AssetSources;
 using Vortex.Core.Enums;
 
 namespace asteroids
@@ -10,16 +8,6 @@ namespace asteroids
     {
         static void Main()
         {
-            // Creates a new instance of AssetLoader and assigns it to StaticAssetLoader.Instance.
-            StaticAssetLoader.Initialize();
-            
-            // Create a new file system asset source to access Models and SDK assets. All paths
-            // are relative to the working directory of the game executable.
-            var source = new FileSystemAssetSource();
-            source.AddPath(@"Models");
-            source.AddPath(@"..\..\..\Data");
-            StaticAssetLoader.RegisterSource(source);
-
             var startupAttributes = new StartupAttributes
             {
                 Height = 600,                       // Height in pixels

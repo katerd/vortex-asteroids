@@ -31,7 +31,7 @@ namespace asteroids.Components
                 Entity.Destroy();
 
                 // crappy.
-                Scene.EntityWithComponent<GameDirector>().GetComponent<GameDirector>().AsteroidDestroyed(this);
+                Scene.GetComponent<GameDirector>().AsteroidDestroyed(this);
 
 
                 Logger.Write("Destructible, spawning asteroids", LoggerLevel.Info);

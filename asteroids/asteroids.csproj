@@ -35,17 +35,18 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hatchet">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Hatchet.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK">
       <HintPath>..\packages\OpenTKWithOpenAL.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="QuickFont, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\QuickFont.dll</HintPath>
+    <Reference Include="QuickFont">
+      <HintPath>..\..\..\vortex\Vortex.Graphics.OpenGL\bin\x86\Debug\QuickFont.dll</HintPath>
     </Reference>
-    <Reference Include="SlimMath, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\SlimMath.dll</HintPath>
+    <Reference Include="SlimMath">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\SlimMath.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,40 +56,29 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vortex.Bootstrap, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Bootstrap.dll</HintPath>
+    <Reference Include="Vortex.Bootstrap">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Bootstrap.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Core, Version=1.0.0.12936, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Core.dll</HintPath>
+    <Reference Include="Vortex.Core">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Editor.Common">
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Editor.Common.dll</HintPath>
+    <Reference Include="Vortex.Graphics">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Graphics.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Graphics.dll</HintPath>
+    <Reference Include="Vortex.Graphics.OpenGL">
+      <HintPath>..\..\..\vortex\Vortex.Graphics.OpenGL\bin\x86\Debug\Vortex.Graphics.OpenGL.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Graphics.OpenGL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Graphics.OpenGL.dll</HintPath>
+    <Reference Include="Vortex.Gui">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Gui.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Gui.dll</HintPath>
+    <Reference Include="Vortex.Gui.Renderer">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Gui.Renderer.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Gui.Renderer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Gui.Renderer.dll</HintPath>
+    <Reference Include="Vortex.Scenegraph">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Scenegraph.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Scenegraph, Version=1.0.0.20581, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Scenegraph.dll</HintPath>
-    </Reference>
-    <Reference Include="Vortex.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\vortex\Builds\Debug\Vortex.Windows.dll</HintPath>
+    <Reference Include="Vortex.Windows">
+      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +123,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Materials\ship.material">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Materials\shipImmune.material">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
