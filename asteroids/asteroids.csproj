@@ -98,6 +98,7 @@
     <Compile Include="Extensions\SceneExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\InGame.cs" />
     <Compile Include="Spawners\AsteroidSpawner.cs" />
     <Compile Include="Spawners\BulletSpawner.cs" />
     <Compile Include="Spawners\ShipSpawner.cs" />

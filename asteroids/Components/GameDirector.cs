@@ -1,7 +1,6 @@
 ﻿using asteroids.Extensions;
 using asteroids.Spawners;
 using SlimMath;
-using Vortex.Core.Logging;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
 
@@ -10,11 +9,9 @@ namespace asteroids.Components
     public class GameDirector : ScriptComponent
     {
         public int LivesRemaining { get; set; }
-
         public int CurrentLevel { get; private set; }
         public int AsteroidCount { get; private set; }
 
-        private ShipDefence _shipDefence;
         private bool _deadTriggered;
 
         public override void Initialize()
@@ -29,10 +26,24 @@ namespace asteroids.Components
         private void DoPreLevel()
         {
             CurrentLevel++;
-
-            SpawnAsteroids();
-
+            StartLevel(CurrentLevel);
             InvokeDelayed(DoInLevel, 1);
+        }
+
+        public void StartLevel(int level)
+        {
+            CurrentLevel = level;
+            
+            // clear all existing asteroids
+            var existingRoids = Scene.GetEntitiesWithComponent<Asteroid>();
+            foreach (var roid in existingRoids)
+            {
+                roid.Destroy();
+            }
+
+            // create new ones!
+            SpawnAsteroids();
+            SpawnPlayer();
         }
 
         private void SpawnAsteroids()
@@ -48,29 +59,24 @@ namespace asteroids.Components
 
         private void DoInLevel()
         {
-            if (_shipDefence == null)
+            if (ShipDefence == null)
             {
-                _shipDefence = FindShipDefenceComponent();
-            }
-
-            if (_shipDefence == null)
-            {
-                Logger.Write("Can't find ship defence component!?", LoggerLevel.Error);
+                Log("Can't find ShipDefence component!");
                 return;
             }
 
-            if (_shipDefence.HealthPoints <= 0 && !_deadTriggered)
+            if (ShipDefence.Entity.Active && ShipDefence.HealthPoints <= 0 && !_deadTriggered)
             {
                 _deadTriggered = true;
-                _shipDefence.Entity.Active = false;
+                ShipDefence.Entity.Active = false;
 
                 if (LivesRemaining > 0)
                 {
-                    InvokeDelayed(RespawnPlayer, 2);
+                    InvokeDelayed(SpawnPlayer, 2);
                 }
                 else
                 {
-                    // todo: show replay button
+                    LivesRemaining = -1;
                     return;
                 }
             }
@@ -88,25 +94,15 @@ namespace asteroids.Components
             }
         }
 
-        private Entity ShipEntity
+        private void SpawnPlayer()
         {
-            get { return Scene.GetEntityWithComponent<ShipMovement>(); }
-        }
+            // remove old ship, and create a new one.
+            if (ShipEntity != null)
+                ShipEntity.Destroy();
 
-        private void RespawnPlayer()
-        {
-            var ship = ShipEntity;
-            ship.Active = true;
-            ship.LocalPosition = new Vector3(-30, 0, 0);
-            ship.RigidbodyComponent.Velocity = new Vector3();
-            ship.LocalRotation = ship.LocalRotation.Scale(1, 1, 0);
-
-            var defence = ship.GetComponent<ShipDefence>();
-            defence.HealthPoints = defence.MaximumHealthPoints;
-            defence.MakeImmune();
+            ShipSpawner.SpawnIn(Scene, new Vector3(-30, 0, 0));
 
             LivesRemaining -= 1;
-
             _deadTriggered = false;
         }
 
@@ -120,10 +116,18 @@ namespace asteroids.Components
             AsteroidCount = Scene.GetActiveAsteroidCount();
         }
 
-        private ShipDefence FindShipDefenceComponent()
+        private Entity ShipEntity
         {
-            var shipEntity = ShipEntity;
-            return shipEntity != null ? shipEntity.GetComponent<ShipDefence>() : null;
+            get { return Scene.GetEntityWithComponent<ShipMovement>(); }
+        }
+
+        private ShipDefence ShipDefence
+        {
+            get
+            {
+                var shipEntity = ShipEntity;
+                return shipEntity != null ? shipEntity.GetComponent<ShipDefence>() : null;
+            }
         }
     }
 }

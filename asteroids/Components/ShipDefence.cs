@@ -4,7 +4,6 @@ using Vortex.Core;
 using Vortex.Core.Assets;
 using Vortex.Core.Extensions;
 using Vortex.Graphics;
-using Vortex.Graphics.OpenGL;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
 
@@ -80,6 +79,7 @@ namespace asteroids.Components
             if (HealthPoints < 0)
             {
                 HealthPoints = 0;
+                Log("Ship is wrecked.");
             }
 
         }

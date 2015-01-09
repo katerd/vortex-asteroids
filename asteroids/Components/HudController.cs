@@ -7,40 +7,45 @@ namespace asteroids.Components
     {
         public LabelWidgetComponent StatusLabel { get; set; }
         public ImageWidgetComponent ShipHealth { get; set; }
+        public LabelWidgetComponent GameOverLabel { get; set; }
 
         private GameDirector _gameDirector;
-        private ShipDefence _shipDefence;
 
         public override void OnUpdate(float delta)
         {
             base.OnUpdate(delta);
-
-            if (_shipDefence == null)
-            {
-                _shipDefence = FindShipDefenceComponent();
-            }
 
             if (_gameDirector == null)
             {
                 _gameDirector = Scene.GetComponent<GameDirector>();
             }
 
+            if (_gameDirector == null)
+                return;
+
             StatusLabel.Text = GetLabelText();
             ShipHealth.HorizontalCrop = GetShipHealthPercentage();
+            GameOverLabel.Visible = _gameDirector.LivesRemaining < 0;
         }
 
-        private ShipDefence FindShipDefenceComponent()
+        private ShipDefence ShipDefenceComponent
         {
-            // Get component attached to the one the player is controlling.
-            var entity = Scene.GetEntityWithComponent<ShipMovement>();
-            return entity != null ? entity.GetComponent<ShipDefence>() : null;
+            get
+            {
+                // Get component attached to the one the player is controlling.
+                var entity = Scene.GetEntityWithComponent<ShipMovement>();
+                return entity != null ? entity.GetComponent<ShipDefence>() : null;
+            }
         }
 
         private float GetShipHealthPercentage()
         {
-            if (_shipDefence == null)
+            var shipDefenceComponent = ShipDefenceComponent;
+
+            if (shipDefenceComponent == null)
                 return 0;
-            return _shipDefence.HealthPoints/(float)_shipDefence.MaximumHealthPoints;
+
+            return shipDefenceComponent.HealthPoints / (float)shipDefenceComponent.MaximumHealthPoints;
         }
 
         private string GetLabelText()
@@ -48,23 +53,20 @@ namespace asteroids.Components
             if (_gameDirector == null)
                 return string.Empty;
 
-            if (_gameDirector.LivesRemaining == 0)
+            if (IsGameOver)
             {
-                return string.Format("Game Over Man! Game Over!");
-            }
-
-            if (_shipDefence == null)
-                return string.Empty;
-
-            if (_shipDefence.HealthPoints == 0)
-            {
-                return string.Format("You died.");
+                return string.Format("");
             }
 
             return string.Format("Current level: {1}, asteroids: {0}, lives: {2}", 
                 _gameDirector.AsteroidCount,
                 _gameDirector.CurrentLevel,
                 _gameDirector.LivesRemaining);
+        }
+
+        private bool IsGameOver
+        {
+            get { return _gameDirector.LivesRemaining < 0; }
         }
     }
 }
