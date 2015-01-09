@@ -53,6 +53,9 @@ namespace asteroids.Components
                 return string.Format("Game Over Man! Game Over!");
             }
 
+            if (_shipDefence == null)
+                return string.Empty;
+
             if (_shipDefence.HealthPoints == 0)
             {
                 return string.Format("You died.");
