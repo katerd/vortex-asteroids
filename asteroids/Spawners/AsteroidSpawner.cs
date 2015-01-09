@@ -63,7 +63,7 @@ namespace asteroids.Spawners
 
             asteroid.CreateComponent<ScreenConstrainer>(constrainer =>
             {
-                constrainer.Extents = new Vector3(SpawnRange*0.5f, SpawnRange*0.5f, 0);
+                constrainer.Extents = new Vector3(40, 30, 0);
             });
         }
 

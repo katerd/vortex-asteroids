@@ -62,7 +62,7 @@ namespace asteroids.Components
             if (_shipDefence.HealthPoints <= 0 && !_deadTriggered)
             {
                 _deadTriggered = true;
-                ShipEntity.Active = false;
+                _shipDefence.Entity.Active = false;
 
                 if (LivesRemaining > 0)
                 {

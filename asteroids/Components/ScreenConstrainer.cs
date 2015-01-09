@@ -11,20 +11,26 @@ namespace asteroids.Components
         {
             base.OnFrame(delta);
 
-            var newX = Entity.RigidbodyComponent.Velocity.X;
-            var newY = Entity.RigidbodyComponent.Velocity.Y;
+            var vx = Entity.RigidbodyComponent.Velocity.X;
+            var vy = Entity.RigidbodyComponent.Velocity.Y;
 
-            if (Entity.LocalPosition.X > Extents.X || Entity.LocalPosition.X < -Extents.X)
+            var x = Entity.LocalPosition.X;
+            var y = Entity.LocalPosition.Y;
+
+            var ex = Extents.X;
+            var ey = Extents.Y;
+
+            if ((x > ex && vx > 0) || (x < -ex && vx < 0))
             {
-                newX = -newX;
+                vx = -vx;
             }
 
-            if (Entity.LocalPosition.Y > Extents.Y || Entity.LocalPosition.Y < -Extents.Y)
+            if ((y > ey && vy > 0) || (y < -ey && vy < 0))
             {
-                newY = -newY;
+                vy = -vy;
             }
 
-            Entity.RigidbodyComponent.Velocity = new Vector3(newX, newY, 0);
+            Entity.RigidbodyComponent.Velocity = new Vector3(vx, vy, 0);
         }
     }
 }
