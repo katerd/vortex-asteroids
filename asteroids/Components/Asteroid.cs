@@ -1,5 +1,5 @@
 ﻿using asteroids.Enums;
-using asteroids.Spawners;
+using asteroids.Messaging;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
 
@@ -77,7 +77,7 @@ namespace asteroids.Components
                     Log("Critical hit smashes asteroid into a fine mist.");
                 }
 
-                gameDirector.HandleGameEvent(EventType.AsteroidDestroyed);
+                this.Dispatch(EventType.AsteroidDestroyed);
             }
         }
     }

@@ -97,6 +97,9 @@
     <Compile Include="Components\WeaponPort.cs" />
     <Compile Include="Enums\EventType.cs" />
     <Compile Include="Extensions\SceneExtensions.cs" />
+    <Compile Include="Messaging\MessageDispatcher.cs" />
+    <Compile Include="Messaging\MessageHandler.cs" />
+    <Compile Include="Messaging\ScriptComponentExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\InGame.cs" />

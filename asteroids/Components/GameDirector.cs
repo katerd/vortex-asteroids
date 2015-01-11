@@ -1,4 +1,5 @@
 ﻿using asteroids.Enums;
+using asteroids.Messaging;
 using asteroids.Spawners;
 using SlimMath;
 using Vortex.Scenegraph;
@@ -39,25 +40,13 @@ namespace asteroids.Components
         {
             base.Initialize();
 
+            this.SubscribeTo(EventType.AsteroidDestroyed, HandleAsteroidDestroyed);
+            this.SubscribeTo(EventType.PlayerDestroyed, HandlePlayerDestroyed);
+
             GameCompleted = false;
             CurrentLevel = 0;
             LivesRemaining = 3;
             InvokeDelayed(DoPreLevel, 1);
-        }
-
-        public void HandleGameEvent(EventType eventType)
-        {
-            switch (eventType)
-            {
-                case EventType.AsteroidDestroyed:
-                    HandleAsteroidDestroyed();
-                    break;
-                case EventType.PlayerDestroyed:
-                    HandlePlayerDestroyed();
-                    break;
-                default:
-                    return;
-            }
         }
 
         private void DoPreLevel()
@@ -68,8 +57,7 @@ namespace asteroids.Components
 
         private void SpawnAsteroids()
         {
-            //var asteroidCount = 3 + (int) (CurrentLevel*2f);
-            var asteroidCount = 1;
+            var asteroidCount = 3 + (int) (CurrentLevel*2f);
 
             for (var i = 0; i < asteroidCount; i++)
             {
@@ -78,7 +66,7 @@ namespace asteroids.Components
             }
         }
 
-        private void HandleAsteroidDestroyed()
+        private void HandleAsteroidDestroyed(object messageId, object data)
         {
             Log(string.Format("Asteroid destroyed. count = {0}", AsteroidCount));
 
@@ -91,7 +79,7 @@ namespace asteroids.Components
             }
         }
 
-        private void HandlePlayerDestroyed()
+        private void HandlePlayerDestroyed(object messageId, object data)
         {
             if (LivesRemaining > 0)
             {

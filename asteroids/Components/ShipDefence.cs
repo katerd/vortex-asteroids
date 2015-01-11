@@ -1,5 +1,6 @@
 ﻿using System;
 using asteroids.Enums;
+using asteroids.Messaging;
 using SlimMath;
 using Vortex.Core;
 using Vortex.Core.Assets;
@@ -80,7 +81,7 @@ namespace asteroids.Components
             if (HealthPoints < 0)
             {
                 HealthPoints = 0;
-                Scene.GetComponent<GameDirector>().HandleGameEvent(EventType.PlayerDestroyed);
+                this.Dispatch(EventType.PlayerDestroyed);
             }
 
         }
