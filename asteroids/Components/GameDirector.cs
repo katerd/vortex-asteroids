@@ -1,4 +1,4 @@
-﻿using asteroids.Extensions;
+﻿using asteroids.Enums;
 using asteroids.Spawners;
 using SlimMath;
 using Vortex.Scenegraph;
@@ -11,29 +11,18 @@ namespace asteroids.Components
         public int LivesRemaining { get; set; }
         public int CurrentLevel { get; private set; }
         public int AsteroidCount { get; private set; }
+        public bool GameCompleted { get; set; }
 
-        private bool _deadTriggered;
-
-        public override void Initialize()
+        public void SpawnAsteroid(Scene scene, int size, Vector3 worldPosition)
         {
-            base.Initialize();
-
-            CurrentLevel = 0;
-            LivesRemaining = 3;
-            InvokeDelayed(DoPreLevel, 1);
-        }
-
-        private void DoPreLevel()
-        {
-            CurrentLevel++;
-            StartLevel(CurrentLevel);
-            InvokeDelayed(DoInLevel, 1);
+            AsteroidSpawner.SpawnIn(Scene, size, worldPosition);
+            AsteroidCount++;
         }
 
         public void StartLevel(int level)
         {
             CurrentLevel = level;
-            
+
             // clear all existing asteroids
             var existingRoids = Scene.GetEntitiesWithComponent<Asteroid>();
             foreach (var roid in existingRoids)
@@ -46,88 +35,100 @@ namespace asteroids.Components
             SpawnPlayer();
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            GameCompleted = false;
+            CurrentLevel = 0;
+            LivesRemaining = 3;
+            InvokeDelayed(DoPreLevel, 1);
+        }
+
+        public void HandleGameEvent(EventType eventType)
+        {
+            switch (eventType)
+            {
+                case EventType.AsteroidDestroyed:
+                    HandleAsteroidDestroyed();
+                    break;
+                case EventType.PlayerDestroyed:
+                    HandlePlayerDestroyed();
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void DoPreLevel()
+        {
+            CurrentLevel++;
+            StartLevel(CurrentLevel);
+        }
+
         private void SpawnAsteroids()
         {
-            var asteroidCount = 5 + (int) (CurrentLevel*4f);
+            //var asteroidCount = 3 + (int) (CurrentLevel*2f);
+            var asteroidCount = 1;
 
             for (var i = 0; i < asteroidCount; i++)
             {
                 AsteroidSpawner.SpawnIn(Scene, 3);
+                AsteroidCount++;
             }
-            AsteroidCount += asteroidCount;
         }
 
-        private void DoInLevel()
+        private void HandleAsteroidDestroyed()
         {
-            if (ShipDefence == null)
-            {
-                Log("Can't find ShipDefence component!");
-                return;
-            }
+            Log(string.Format("Asteroid destroyed. count = {0}", AsteroidCount));
 
-            if (ShipDefence.Entity.Active && ShipDefence.HealthPoints <= 0 && !_deadTriggered)
-            {
-                _deadTriggered = true;
-                ShipDefence.Entity.Active = false;
-
-                if (LivesRemaining > 0)
-                {
-                    InvokeDelayed(SpawnPlayer, 2);
-                }
-                else
-                {
-                    LivesRemaining = -1;
-                    return;
-                }
-            }
-
-            // get asteroid count.
-            AsteroidCount = Scene.GetActiveAsteroidCount();
+            AsteroidCount--;
 
             if (AsteroidCount == 0)
             {
+                Log("Last asteroid destroyed!");
                 InvokeDelayed(DoLevelComplete, 0);
+            }
+        }
+
+        private void HandlePlayerDestroyed()
+        {
+            if (LivesRemaining > 0)
+            {
+                LivesRemaining--;
+                InvokeDelayed(SpawnPlayer, 2);
             }
             else
             {
-                InvokeDelayed(DoInLevel, 1);
+                LivesRemaining = -1;
             }
         }
 
         private void SpawnPlayer()
         {
             // remove old ship, and create a new one.
-            if (ShipEntity != null)
-                ShipEntity.Destroy();
+            var entity = Scene.GetEntityWithComponent<ShipMovement>();
+            if (entity != null)
+                entity.Destroy();
 
             ShipSpawner.SpawnIn(Scene, new Vector3(-30, 0, 0));
-
-            LivesRemaining -= 1;
-            _deadTriggered = false;
         }
 
         private void DoLevelComplete()
         {
-            InvokeDelayed(DoPreLevel, 3);
-        }
-
-        public void AsteroidDestroyed(Asteroid asteroid)
-        {
-            AsteroidCount = Scene.GetActiveAsteroidCount();
-        }
-
-        private Entity ShipEntity
-        {
-            get { return Scene.GetEntityWithComponent<ShipMovement>(); }
-        }
-
-        private ShipDefence ShipDefence
-        {
-            get
+            if (CurrentLevel == 5)
             {
-                var shipEntity = ShipEntity;
-                return shipEntity != null ? shipEntity.GetComponent<ShipDefence>() : null;
+                DoGameWon();
             }
+            else
+            {
+                InvokeDelayed(DoPreLevel, 3);    
+            }
+        }
+
+        private void DoGameWon()
+        {
+            GameCompleted = true;
         }
     }
 }

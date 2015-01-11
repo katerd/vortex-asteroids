@@ -13,11 +13,23 @@ namespace asteroids
         {
             base.OnResourceLoad();
 
+            ConsoleRenderer.Lines = 5;
+
             SetSceneLighting();
             InGame.LoadInto(Scene);
 
             GameConsole.CommandBindings.Bind("lives", "Set number of lives remaining", SetLivesHandler);
             GameConsole.CommandBindings.Bind("level", "Load a specific level", LoadLevelHandler);
+            GameConsole.CommandBindings.Bind("boom", "Destroy all asteroids", BoomHandler);
+        }
+
+        private void BoomHandler(params string[] parameters)
+        {
+            var roids = Scene.GetEntitiesWithComponent<Asteroid>();
+            foreach (var roid in roids)
+            {
+                roid.GetComponent<Asteroid>().Nuke();
+            }
         }
 
         private void LoadLevelHandler(params string[] parameters)

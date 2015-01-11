@@ -25,7 +25,18 @@ namespace asteroids.Components
 
             StatusLabel.Text = GetLabelText();
             ShipHealth.HorizontalCrop = GetShipHealthPercentage();
-            GameOverLabel.Visible = _gameDirector.LivesRemaining < 0;
+
+            GameOverLabel.Visible = false;
+            if (_gameDirector.LivesRemaining < 0)
+            {
+                GameOverLabel.Visible = true;
+                GameOverLabel.Text = "Game over man!";
+            }
+            else if (_gameDirector.GameCompleted)
+            {
+                GameOverLabel.Visible = true;
+                GameOverLabel.Text = "You're winner!";
+            }
         }
 
         private ShipDefence ShipDefenceComponent

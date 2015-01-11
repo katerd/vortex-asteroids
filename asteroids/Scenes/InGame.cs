@@ -37,11 +37,11 @@ namespace asteroids.Scenes
             });
 
             // ---- Game Over Label
-            var gameOverEntity = scene.CreateEntity("gameover_entity", hudControllerEntity);
-            gameOverEntity.LocalPosition = new Vector3(270, 270, 0);
-            gameOverEntity.CreateComponent<LabelWidgetComponent>(component =>
+            var gameEndLabelEntity = scene.CreateEntity("gameover_entity", hudControllerEntity);
+            gameEndLabelEntity.LocalPosition = new Vector3(270, 270, 0);
+            gameEndLabelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
-                component.Text = "Game over!";
+                component.Text = "";
                 component.FontSize = 50;
                 component.Visible = false;
             });

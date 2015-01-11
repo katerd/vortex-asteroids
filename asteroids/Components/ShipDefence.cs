@@ -1,4 +1,5 @@
 ﻿using System;
+using asteroids.Enums;
 using SlimMath;
 using Vortex.Core;
 using Vortex.Core.Assets;
@@ -79,7 +80,7 @@ namespace asteroids.Components
             if (HealthPoints < 0)
             {
                 HealthPoints = 0;
-                Log("Ship is wrecked.");
+                Scene.GetComponent<GameDirector>().HandleGameEvent(EventType.PlayerDestroyed);
             }
 
         }

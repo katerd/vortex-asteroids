@@ -95,6 +95,7 @@
     <Compile Include="Components\ShipMovement.cs" />
     <Compile Include="Components\SmoothFollow.cs" />
     <Compile Include="Components\WeaponPort.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Extensions\SceneExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
