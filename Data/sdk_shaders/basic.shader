@@ -11,12 +11,11 @@
             Vertex ![
                 #version 120
 
-                uniform mat4 worldViewProjMat;
-                uniform mat4 viewMat;
+                uniform mat4 _modelViewProjection;
 
                 void main()
                 {
-                    gl_Position = worldViewProjMat * gl_Vertex;
+                    gl_Position = _modelViewProjection * gl_Vertex;
 
                     gl_FrontColor = gl_Color;
 

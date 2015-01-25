@@ -2,8 +2,10 @@
 using asteroids.Components;
 using SlimMath;
 using Vortex.Core;
+using Vortex.Core.Assets;
 using Vortex.Core.Collision;
 using Vortex.Scenegraph;
+using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
 using Vortex.Scenegraph.Utility;
 
@@ -61,9 +63,10 @@ namespace asteroids.Spawners
                 component.PositionConstraint = new Vector3Constraints { X = false, Y = false, Z = true};
             });
 
-            asteroid.CreateComponent<ScreenConstrainer>(constrainer =>
+            asteroid.CreateComponent<JsScriptComponent>(constrainer =>
             {
-                constrainer.Extents = new Vector3(40, 30, 0);
+                constrainer.Source = StaticAssetLoader.GetString("screenConstrainer.js");
+                constrainer.Properties.Extents = new Vector3(40, 30, 0);
             });
         }
 

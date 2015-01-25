@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -35,18 +35,28 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hatchet">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Hatchet.dll</HintPath>
+    <Reference Include="Hatchet, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Hatchet.0.3.3\lib\net45\Hatchet.dll</HintPath>
+    </Reference>
+    <Reference Include="Jint, Version=2.4.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Jint.2.4.0\lib\portable-net40+sl50+win+wpa81+wp80\Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.5.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\NVorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis.OpenTKSupport, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\NVorbis.OpenTKSupport.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
       <HintPath>..\packages\OpenTKWithOpenAL.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="QuickFont">
-      <HintPath>..\..\..\vortex\Vortex.Graphics.OpenGL\bin\x86\Debug\QuickFont.dll</HintPath>
-    </Reference>
-    <Reference Include="SlimMath">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\SlimMath.dll</HintPath>
+    <Reference Include="SlimMath, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\SlimMath.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,29 +66,45 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vortex.Bootstrap">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Bootstrap.dll</HintPath>
+    <Reference Include="Vortex.Audio, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Audio.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Core">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Core.dll</HintPath>
+    <Reference Include="Vortex.Bootstrap, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Bootstrap.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Graphics">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Graphics.dll</HintPath>
+    <Reference Include="Vortex.Core, Version=1.0.0.34458, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Graphics.OpenGL">
-      <HintPath>..\..\..\vortex\Vortex.Graphics.OpenGL\bin\x86\Debug\Vortex.Graphics.OpenGL.dll</HintPath>
+    <Reference Include="Vortex.Graphics, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Graphics.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Gui">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Gui.dll</HintPath>
+    <Reference Include="Vortex.Graphics.OpenGL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Graphics.OpenGL.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Gui.Renderer">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Gui.Renderer.dll</HintPath>
+    <Reference Include="Vortex.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Gui.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Scenegraph">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Scenegraph.dll</HintPath>
+    <Reference Include="Vortex.Gui.Renderer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Gui.Renderer.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Windows">
-      <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\x86\Debug\Vortex.Windows.dll</HintPath>
+    <Reference Include="Vortex.Particles, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Particles.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.Scenegraph, Version=1.0.0.21292, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Scenegraph.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\VortexEngine.Core.0.0.29-alpha\lib\net45\Vortex.Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -86,10 +112,8 @@
     <Compile Include="Components\Asteroid.cs" />
     <Compile Include="Components\HudController.cs" />
     <Compile Include="Components\KillAfterDuration.cs" />
-    <Compile Include="Components\BulletMovement.cs" />
     <Compile Include="Components\GameDirector.cs" />
     <Compile Include="Components\Projectile.cs" />
-    <Compile Include="Components\ScreenConstrainer.cs" />
     <Compile Include="Components\ShipDefence.cs" />
     <Compile Include="Components\ShipFiring.cs" />
     <Compile Include="Components\ShipMovement.cs" />

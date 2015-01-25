@@ -1,8 +1,10 @@
 ﻿using asteroids.Components;
 using SlimMath;
 using Vortex.Core;
+using Vortex.Core.Assets;
 using Vortex.Core.Extensions;
 using Vortex.Scenegraph;
+using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
 using Vortex.Scenegraph.Utility;
 
@@ -16,15 +18,18 @@ namespace asteroids.Spawners
 
             bullet.LocalPosition = position;
 
-            var bulletMovement = new BulletMovement
+            bullet.CreateComponent<JsScriptComponent>(component =>
             {
-                MovementVector = VectorExtensions.From2DAngle(angle).NormalizeRet(),
-                MovementSpeed = bulletSpeed
-            };
-            bullet.AddComponent(bulletMovement);
+                component.Source = StaticAssetLoader.GetString("bulletMovement.js");
+                component.Properties.MovementVector = VectorExtensions.From2DAngle(angle).NormalizeRet();
+                component.Properties.MovementSpeed = bulletSpeed;
+            });
 
-            var bulletLifeComponent = new KillAfterDuration { KillTime = Timer.GetTime() + (bulletLife * 1000) };
-            bullet.AddComponent(bulletLifeComponent);
+            bullet.CreateComponent<JsScriptComponent>(component =>
+            {
+                component.Source = StaticAssetLoader.GetString("killAfterDuration.js");
+                component.Properties.KillTime = Timer.GetTime() + (bulletLife*1000);
+            });
 
             var projectile = new Projectile { BaseDamage = damage };
             bullet.AddComponent(projectile);

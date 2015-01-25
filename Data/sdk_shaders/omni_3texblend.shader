@@ -10,18 +10,18 @@ Name "Omni Direction Lighting / 3 Textures"
 
         #version 120
 
-        uniform mat4 worldViewProjMat;
-        uniform mat4 viewMat;
+        uniform mat4 _modelViewProjection;
+        uniform mat4 _modelView;
         uniform vec3 lightNormal;
         uniform vec4 matDiffuse = vec4(1.0, 1.0, 1.0, 1.0);
         uniform vec4 matAmbient = vec4(0.0, 0.0, 0.0, 0.0);
 
         void main()
         {
-            gl_Position = worldViewProjMat * gl_Vertex;
+            gl_Position = _modelViewProjection * gl_Vertex;
 
-            vec3 viewLightNormal = (viewMat * vec4(lightNormal, 0)).xyz;
-            vec3 viewNormal = (viewMat * vec4(gl_Normal, 0)).xyz;
+            vec3 viewLightNormal = (_modelView * vec4(lightNormal, 0)).xyz;
+            vec3 viewNormal = (_modelView * vec4(gl_Normal, 0)).xyz;
 
             float lt = dot(-lightNormal.xyz, viewNormal.xyz);
 

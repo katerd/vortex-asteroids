@@ -23,6 +23,7 @@ namespace asteroids
             GameConsole.CommandBindings.Bind("boom", "Destroy all asteroids", BoomHandler);
         }
 
+
         private void BoomHandler(params string[] parameters)
         {
             var roids = Scene.GetEntitiesWithComponent<Asteroid>();

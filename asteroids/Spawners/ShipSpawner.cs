@@ -56,9 +56,10 @@ namespace asteroids.Spawners
             ship.CreateComponent<ShipDefence>();
             ship.CreateComponent<SphereColliderComponent>(component => component.Radius = 1);
 
-            ship.CreateComponent<ScreenConstrainer>(constrainer =>
+            ship.CreateComponent<JsScriptComponent>(component =>
             {
-                constrainer.Extents = new Vector3(40, 30, 0);
+                component.Source = StaticAssetLoader.GetString("screenConstrainer.js");
+                component.Properties.Extents = new Vector3(40, 30, 0);
             });
 
 
