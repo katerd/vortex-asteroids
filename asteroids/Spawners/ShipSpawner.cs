@@ -29,9 +29,6 @@ namespace asteroids.Spawners
                 component.PositionConstraint = new Vector3Constraints {X = false, Y = false, Z = true};
             });
 
-            ship.CreateComponent<ShipMovement>();
-            ship.CreateComponent<ShipFiring>();
-
             // todo: this stuff shouldn't be done outside the scenegraph construction.
             var mesh = ship.GetComponentInSelfOrChildren<MeshComponent>();
             mesh.Material = StaticAssetLoader.GetInstance<Material>("Materials/ship.material");
@@ -54,8 +51,18 @@ namespace asteroids.Spawners
             lightAttachPoint.LocalPosition = new Vector3(radius, 0, 0);
             ship.AddChild(lightAttachPoint);
 
+            ship.CreateComponent<ShipMovement>();
+            ship.CreateComponent<ShipFiring>();
             ship.CreateComponent<ShipDefence>();
             ship.CreateComponent<SphereColliderComponent>(component => component.Radius = 1);
+
+            ship.CreateComponent<JsScriptComponent>(component =>
+            {
+                component.Source = StaticAssetLoader.GetString("screenConstrainer.js");
+                component.Properties.Extents = new Vector3(40, 30, 0);
+            });
+
+
         }
     }
 }

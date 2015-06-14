@@ -2,8 +2,10 @@
 using asteroids.Components;
 using SlimMath;
 using Vortex.Core;
+using Vortex.Core.Assets;
 using Vortex.Core.Collision;
 using Vortex.Scenegraph;
+using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
 using Vortex.Scenegraph.Utility;
 
@@ -41,7 +43,7 @@ namespace asteroids.Spawners
                 throw new ArgumentOutOfRangeException("size");
             }
 
-            var asteroid = scene.CreateEntity(GetModelFilename(size), true);
+            var asteroid = ColladaUtils.CreateEntity(scene, GetModelFilename(size), true);
             asteroid.LocalPosition = worldPosition;
 
             asteroid.CreateComponent<Asteroid>(destructible =>
@@ -61,9 +63,10 @@ namespace asteroids.Spawners
                 component.PositionConstraint = new Vector3Constraints { X = false, Y = false, Z = true};
             });
 
-            asteroid.CreateComponent<ScreenConstrainer>(constrainer =>
+            asteroid.CreateComponent<JsScriptComponent>(constrainer =>
             {
-                constrainer.Extents = new Vector3(SpawnRange*0.5f, SpawnRange*0.5f, 0);
+                constrainer.Source = StaticAssetLoader.GetString("screenConstrainer.js");
+                constrainer.Properties.Extents = new Vector3(40, 30, 0);
             });
         }
 

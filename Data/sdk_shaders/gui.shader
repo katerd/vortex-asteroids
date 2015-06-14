@@ -1,22 +1,22 @@
 {
-    Name Basic
+    Name "GUI"
 
     Passes
     [
         {
-            Name "Basic Pass01"
+            Name "GUI Base Pass"
 
-            ZWrite true
+            ZWrite false
+            ZTest false
 
             Vertex ![
                 #version 120
 
-                uniform mat4 worldViewProjMat;
-                uniform mat4 viewMat;
+                uniform mat4 _modelViewProjection;
 
                 void main()
                 {
-                    gl_Position = worldViewProjMat * gl_Vertex;
+                    gl_Position = _modelViewProjection * gl_Vertex;
 
                     gl_FrontColor = gl_Color;
 
@@ -32,8 +32,6 @@
                 void main()
                 {
                     gl_FragColor = gl_Color * texture2D(tex0, gl_TexCoord[0].st);
-
-                    // testing
                 }
             ]!
         }

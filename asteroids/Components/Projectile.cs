@@ -4,7 +4,7 @@ namespace asteroids.Components
 {
     public class Projectile : ScriptComponent
     {
-        public float BaseDamage { get; set; }
+        public int BaseDamage { get; set; }
 
         public void HitObject()
         {

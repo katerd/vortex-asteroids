@@ -16,7 +16,7 @@ namespace asteroids.Components
         {
             base.OnUpdate(delta);
 
-            var ship = Scene.EntityWithComponent<ShipMovement>();
+            var ship = Scene.GetEntityWithComponent<ShipMovement>();
 
             if (ship == null)
                 return;
