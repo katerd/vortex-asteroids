@@ -8,8 +8,11 @@ namespace asteroids.Components
         public LabelWidgetComponent StatusLabel { get; set; }
         public ImageWidgetComponent ShipHealth { get; set; }
         public LabelWidgetComponent GameOverLabel { get; set; }
+        public LabelWidgetComponent ScoreLabel { get; set; }
 
         private GameDirector _gameDirector;
+
+        private int _displayedScore;
 
         public override void OnUpdate(float delta)
         {
@@ -23,8 +26,14 @@ namespace asteroids.Components
             if (_gameDirector == null)
                 return;
 
+
+            EaseDisplayedScore();
+            ScoreLabel.Text = string.Format("Score: {0}", _displayedScore);
+
             StatusLabel.Text = GetLabelText();
             ShipHealth.HorizontalCrop = GetShipHealthPercentage();
+
+            
 
             GameOverLabel.Visible = false;
             if (_gameDirector.LivesRemaining < 0)
@@ -37,6 +46,24 @@ namespace asteroids.Components
                 GameOverLabel.Visible = true;
                 GameOverLabel.Text = "You're winner!";
             }
+        }
+
+        private void EaseDisplayedScore()
+        {
+            if (_gameDirector.Score == 0)
+            {
+                _displayedScore = 0;
+                return;
+            }
+
+            var diff = _gameDirector.Score - _displayedScore;
+
+            if (diff > 10)
+            {
+                diff = (int) (diff*0.1f);
+            }
+
+            _displayedScore += diff;
         }
 
         private ShipDefence ShipDefenceComponent

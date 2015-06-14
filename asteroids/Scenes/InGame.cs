@@ -11,6 +11,7 @@ namespace asteroids.Scenes
         public static void LoadInto(Scene scene)
         {
             scene.CreateEntityFromComponent(new GameDirector());
+            scene.CreateEntityFromComponent(new ScoreKeeper());
             CreateHudComponents(scene);
         }
 
@@ -21,11 +22,12 @@ namespace asteroids.Scenes
 
             // ---- Progress Status Text
             var labelEntity = scene.CreateEntity("label_entity", hudControllerEntity);
+            labelEntity.LocalPosition = new Vector3(30, 30, 0);
             labelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
                 component.FontSize = 22;
             });
-            labelEntity.LocalPosition = new Vector3(30, 30, 0);
+            
 
             // ---- Ship Health Bar
             var shipHealthEntity = scene.CreateEntity("shiphealth_entity", hudControllerEntity);
@@ -46,12 +48,22 @@ namespace asteroids.Scenes
                 component.Visible = false;
             });
 
+            var scoreLabelEntity = scene.CreateEntity("score_entity", hudControllerEntity);
+            scoreLabelEntity.LocalPosition = new Vector3(450, 30, 0);
+            scoreLabelEntity.CreateComponent<LabelWidgetComponent>(component =>
+            {
+                component.Text = "";
+                component.FontSize = 22;
+                component.Visible = true;
+            });
+
             // ---- Controlling entity
             hudControllerEntity.CreateComponent<HudController>(component =>
             {
                 component.ShipHealth = scene.GetEntityByName("shiphealth_entity").GetComponent<ImageWidgetComponent>();
                 component.StatusLabel = scene.GetEntityByName("label_entity").GetComponent<LabelWidgetComponent>();
                 component.GameOverLabel = scene.GetEntityByName("gameover_entity").GetComponent<LabelWidgetComponent>();
+                component.ScoreLabel = scene.GetEntityByName("score_entity").GetComponent<LabelWidgetComponent>();
             });
 
 

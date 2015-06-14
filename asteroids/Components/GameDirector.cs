@@ -13,6 +13,7 @@ namespace asteroids.Components
         public int CurrentLevel { get; private set; }
         public int AsteroidCount { get; private set; }
         public bool GameCompleted { get; set; }
+        public int Score { get; set; }
 
         public void SpawnAsteroid(Scene scene, int size, Vector3 worldPosition)
         {

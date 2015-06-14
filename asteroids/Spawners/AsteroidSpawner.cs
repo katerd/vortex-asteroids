@@ -43,7 +43,7 @@ namespace asteroids.Spawners
                 throw new ArgumentOutOfRangeException("size");
             }
 
-            var asteroid = scene.CreateEntity(GetModelFilename(size), true);
+            var asteroid = ColladaUtils.CreateEntity(scene, GetModelFilename(size), true);
             asteroid.LocalPosition = worldPosition;
 
             asteroid.CreateComponent<Asteroid>(destructible =>

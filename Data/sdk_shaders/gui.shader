@@ -1,12 +1,13 @@
 {
-    Name Basic
+    Name "GUI"
 
     Passes
     [
         {
-            Name "Basic Pass01"
+            Name "GUI Base Pass"
 
-            ZWrite true
+            ZWrite false
+            ZTest false
 
             Vertex ![
                 #version 120
@@ -31,8 +32,6 @@
                 void main()
                 {
                     gl_FragColor = gl_Color * texture2D(tex0, gl_TexCoord[0].st);
-
-                    // testing
                 }
             ]!
         }

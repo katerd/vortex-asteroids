@@ -1,11 +1,10 @@
 {
-    Name "No Texture"
+    Name "Vertex Colour"
 
     Passes
     [
         {
-            Name "No Texture Pass01"
-
+            Name "Vertex Colour Pass 1"
 
             Vertex ![
 

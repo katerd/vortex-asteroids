@@ -1,6 +1,6 @@
 {
 	Name "Ship Material"
-	Shader "sdk_shaders/defaultAmbient.shader"
+	Shader "sdk_shaders/standard.shader"
 	
 	Properties
 	[

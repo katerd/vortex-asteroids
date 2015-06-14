@@ -1,6 +1,41 @@
 {
-    Name "DefaultAmbient"
+    Name "Standard"
 
+	Defines
+	[
+		{
+			Name "DirectionalLight"
+			Text ![
+			
+				float lt = dot(-_lightWorldVector.xyz, gl_Normal.xyz);
+				lt *= _lightIntensity;
+
+				vec3 diffuseRGB = gl_Color.rgb * matDiffuse.rgb * _lightColour.rgb * lt;
+				gl_FrontColor.a = matDiffuse.a * gl_Color.a;
+			
+			
+			]!
+		}
+		
+		{
+			
+			Name "PointLight"
+			Text ![
+			
+				vec3 worldPos = _world + gl_Vertex.xyz;
+				float dist = length(worldPos - _lightWorldVector.xyz);
+				float radis = dist / _lightRadius;
+				
+				float attenuation = clamp((1 / (radis))-1, 0.0, 1.0);
+				
+				vec3 dtl = normalize(_lightWorldVector.xyz - worldPos);
+				float lt = clamp(dot(gl_Normal.xyz, dtl), 0.0, 1.0);
+				lt *= _lightIntensity;
+			
+			]!
+		}
+	]
+	
     Passes
     [
         {
@@ -14,9 +49,9 @@
 
                 #version 120
 
-                uniform vec4 worldVec;
                 uniform mat4 _modelViewProjection;
                 uniform mat4 _modelView;
+				uniform vec3 _world;
                 uniform vec4 _lightWorldVector;
                 uniform vec4 _lightColour;
                 uniform float _lightIntensity;
@@ -33,35 +68,14 @@
 
                     if (_lightRadius < 0)
                     {
-                        // directional light
-                        vec3 viewLightNormal = (_modelView * _lightWorldVector).xyz;
-                        vec3 viewNormal = (_modelView * vec4(gl_Normal, 0)).xyz;
-
-                        float lt = dot(-_lightWorldVector.xyz, viewNormal.xyz);
-                        lt *= _lightIntensity;
-
-                        vec3 diffuseRGB = gl_Color.rgb * matDiffuse.rgb * _lightColour.rgb * lt;
-
-                        gl_FrontColor.rgb = ambientRGB + diffuseRGB;
-						
-                        gl_FrontColor.a = matDiffuse.a * gl_Color.a;
+                        #DirectionalLight
+						gl_FrontColor.rgb = ambientRGB + diffuseRGB;
                     }
                     else
                     {
-                        // spotlight
-                        vec3 worldPos = (_modelView * gl_Vertex).xyz;
-                        float dist = length(worldPos - _lightWorldVector.xyz);
-                        float radis = dist / _lightRadius;
-                        float attenuation = clamp((1 / (radis))-1, 0.0, 1.0);
-
-                        vec3 dtl = normalize(_lightWorldVector.xyz - worldPos);
-                        float lt = clamp(dot(gl_Normal.xyz, dtl), 0.0, 1.0);
-                        lt *= _lightIntensity;
-
+						#PointLight
                         vec3 diffuseRGB = gl_Color.rgb * matDiffuse.rgb * _lightColour.rgb * attenuation * lt;
-
                         gl_FrontColor.rgb = ambientRGB + diffuseRGB;
-						
                         gl_FrontColor.a = gl_Color.a + (_lightGlobalAmbient.a * matAmbient.a) + (_lightColour.a * attenuation * lt);
                     }
 
@@ -99,6 +113,7 @@
 
                 uniform mat4 _modelViewProjection;
                 uniform mat4 _modelView;
+				uniform vec3 _world;
                 uniform vec4 _lightWorldVector;
                 uniform vec4 _lightColour;
                 uniform float _lightIntensity;
@@ -111,32 +126,14 @@
 
                     if (_lightRadius < 0)
                     {
-                        vec3 viewLightNormal = (_modelView * _lightWorldVector).xyz;
-                        vec3 viewNormal = (_modelView * vec4(gl_Normal, 0)).xyz;
-
-                        float lt = dot(-_lightWorldVector.xyz, viewNormal.xyz);
-                        lt *= _lightIntensity;
-
-                        vec3 diffuse = gl_Color.rgb * matDiffuse.rgb * _lightColour.rgb * lt;
-
-                        gl_FrontColor.rgb = diffuse;
-
-                        gl_FrontColor.a = matDiffuse.a * gl_Color.a;
+                        #DirectionalLight
+						gl_FrontColor.rgb = diffuseRGB;
                     }
                     else
                     {
-                        vec3 worldPos = (_modelView * gl_Vertex).xyz;
-                        float dist = length(worldPos - _lightWorldVector.xyz);
-                        float radis = dist / _lightRadius;
-                        float attenuation = clamp((1 / (radis))-1, 0.0, 1.0);
-
-                        vec3 dtl = normalize(_lightWorldVector.xyz - worldPos);
-                        float lt = clamp(dot(gl_Normal.xyz, dtl), 0.0, 1.0);
-                        lt *= _lightIntensity;
-
+                        #PointLight
                         gl_FrontColor.rgba = _lightColour.rgba * attenuation * lt;
                     }
-
 
                     gl_TexCoord[0] = gl_MultiTexCoord0;
                 }

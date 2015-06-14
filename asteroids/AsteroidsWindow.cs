@@ -1,7 +1,9 @@
 ﻿using asteroids.Components;
+using asteroids.ConsoleCommands;
 using asteroids.Scenes;
 using SlimMath;
 using Vortex.Bootstrap;
+using Vortex.Core.Console.Commands;
 using Vortex.Graphics.Enums;
 using Vortex.Scenegraph.Components;
 
@@ -18,40 +20,8 @@ namespace asteroids
             SetSceneLighting();
             InGame.LoadInto(Scene);
 
-            GameConsole.CommandBindings.Bind("lives", "Set number of lives remaining", SetLivesHandler);
-            GameConsole.CommandBindings.Bind("level", "Load a specific level", LoadLevelHandler);
-            GameConsole.CommandBindings.Bind("boom", "Destroy all asteroids", BoomHandler);
-        }
-
-
-        private void BoomHandler(params string[] parameters)
-        {
-            var roids = Scene.GetEntitiesWithComponent<Asteroid>();
-            foreach (var roid in roids)
-            {
-                roid.GetComponent<Asteroid>().Nuke();
-            }
-        }
-
-        private void LoadLevelHandler(params string[] parameters)
-        {
-            int level;
-            if (!int.TryParse(parameters[1], out level))
-                return;
-
-            var director = Scene.GetComponent<GameDirector>();
-            director.StartLevel(level);
-        }
-
-        private void SetLivesHandler(params string[] parameters)
-        {
-            int lives;
-            if (!int.TryParse(parameters[1], out lives))
-                return;
-
-            var director = Scene.GetComponent<GameDirector>();
-
-            director.LivesRemaining = lives;
+            GameConsole.SetContextItem(Scene);
+            GameConsole.RegisterAllCommands();
         }
 
         private void SetSceneLighting()
