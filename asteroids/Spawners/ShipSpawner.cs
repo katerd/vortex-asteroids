@@ -18,8 +18,6 @@ namespace asteroids.Spawners
             var ship = ColladaUtils.CreateEntity(scene, @"Models\asteroid-spaceship.dae");
             ship.Name = "ship";
 
-            position = new Vector3(-30, 0, 0);
-
             ship.LocalPosition = position;
 
             ship.CreateComponent<RigidbodyComponent>(component =>
