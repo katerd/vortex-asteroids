@@ -1,9 +1,6 @@
-﻿using asteroids.Components;
-using asteroids.ConsoleCommands;
-using asteroids.Scenes;
+﻿using asteroids.Scenes;
 using SlimMath;
 using Vortex.Bootstrap;
-using Vortex.Core.Console.Commands;
 using Vortex.Graphics.Enums;
 using Vortex.Scenegraph.Components;
 

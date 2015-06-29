@@ -72,7 +72,6 @@ namespace asteroids.Scenes
 
             camera.CreateComponent<CameraComponent>(component =>
             {
-                //component.Zoom = 60;
                 CameraComponent.Main.Zoom = 80;
             });
         }

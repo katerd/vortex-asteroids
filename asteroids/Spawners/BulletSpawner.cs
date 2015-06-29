@@ -1,4 +1,5 @@
-﻿using asteroids.Components;
+﻿using System.Runtime.InteropServices.ComTypes;
+using asteroids.Components;
 using SlimMath;
 using Vortex.Core;
 using Vortex.Core.Assets;
@@ -15,6 +16,17 @@ namespace asteroids.Spawners
         public static void SpawnIn(Scene scene, Vector3 position, float angle, float bulletLife, float bulletSpeed, int damage)
         {
             var bullet = ColladaUtils.CreateEntity(scene, @"Models\bullet.dae");
+
+            var meshes = bullet.GetComponentsInSelfOrChildren<MeshComponent>();
+            foreach (var mesh in meshes)
+            {
+                mesh.Mesh.Scale(8.0f);
+            }
+            var boundingSpheres = bullet.GetComponentsInSelfOrChildren<SphereColliderComponent>();
+            foreach (var sphere in boundingSpheres)
+            {
+                sphere.Radius *= 8.0f;
+            }
 
             bullet.LocalPosition = position;
 
