@@ -1,9 +1,9 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using asteroids.Components;
+﻿using asteroids.Components;
 using SlimMath;
 using Vortex.Core;
 using Vortex.Core.Assets;
 using Vortex.Core.Extensions;
+using Vortex.Graphics;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
@@ -17,10 +17,12 @@ namespace asteroids.Spawners
         {
             var bullet = ColladaUtils.CreateEntity(scene, @"Models\bullet.dae");
 
+
             var meshes = bullet.GetComponentsInSelfOrChildren<MeshComponent>();
             foreach (var mesh in meshes)
             {
                 mesh.Mesh.Scale(8.0f);
+                mesh.Material = StaticAssetLoader.Get<Material>("Materials/bullet.material");
             }
             var boundingSpheres = bullet.GetComponentsInSelfOrChildren<SphereColliderComponent>();
             foreach (var sphere in boundingSpheres)

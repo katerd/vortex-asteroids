@@ -1,5 +1,7 @@
 ﻿using asteroids.Enums;
 using asteroids.Messaging;
+using Vortex.Core;
+using Vortex.Core.Extensions;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
 
@@ -49,28 +51,11 @@ namespace asteroids.Components
 
             if (Hitpoints <= 0)
             {
-                var gameDirector = Scene.GetComponent<GameDirector>();
-
                 Entity.Destroy();
 
                 if (!_hitByCriticalHit)
                 {
-                    Log("Destructible, spawning asteroids");
-
-                    if (Size == 3)
-                    {
-                        for (var i = 0; i < 3; i++)
-                        {
-                            gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
-                        }
-                    }
-                    else if (Size == 2)
-                    {
-                        for (var i = 0; i < 2; i++)
-                        {
-                            gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
-                        }
-                    }
+                    SplitAsteroid();
                 }
                 else
                 {
@@ -79,6 +64,34 @@ namespace asteroids.Components
 
                 this.Dispatch(EventType.AsteroidDestroyed);
             }
+        }
+
+        private void SplitAsteroid()
+        {
+            var gameDirector = Scene.GetComponent<GameDirector>();
+
+            Log("Destructible, spawning asteroids");
+
+            if (Size == 3)
+            {
+                for (var i = 0; i < 3; i++)
+                {
+                    gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
+                }
+            }
+            else if (Size == 2)
+            {
+                for (var i = 0; i < 2; i++)
+                {
+                    gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
+                }
+            }
+
+            if (StaticRng.Random.NextFloat() > 0.1f)
+            {
+                gameDirector.SpawnPowerup(Scene, Entity.WorldPosition);
+            }
+
         }
     }
 }

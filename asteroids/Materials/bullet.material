@@ -1,0 +1,19 @@
+{
+	Name "Bullet Material"
+	Shader "sdk_shaders/standard.shader"
+	
+	Properties
+	[
+		{
+			Name "matDiffuse"
+			Type Color4
+			Value [0.6 0.0 0.0 0.5]
+		}
+		
+		{
+			Name "matAmbient"
+			Type Color4
+			Value [0.3 0.0 0.0 0.8]
+		}
+	]
+}

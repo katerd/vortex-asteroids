@@ -4,6 +4,7 @@ using SlimMath;
 using Vortex.Core;
 using Vortex.Core.Assets;
 using Vortex.Core.Collision;
+using Vortex.Core.Extensions;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;

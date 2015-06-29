@@ -32,6 +32,12 @@ namespace asteroids.Components
                 roid.Destroy();
             }
 
+            var existingPowerups = Scene.GetEntitiesWithComponent<FireSpeedPowerup>();
+            foreach (var powerup in existingPowerups)
+            {
+                powerup.Destroy();
+            }
+
             // create new ones!
             SpawnAsteroids();
             SpawnPlayer();
@@ -118,6 +124,11 @@ namespace asteroids.Components
         private void DoGameWon()
         {
             GameCompleted = true;
+        }
+
+        public void SpawnPowerup(Scene scene, Vector3 worldPosition)
+        {
+            PowerupSpawner.SpawnIn(Scene, worldPosition);
         }
     }
 }

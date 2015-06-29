@@ -1,0 +1,19 @@
+{
+	Name "Power-up Material"
+	Shader "sdk_shaders/standard.shader"
+	
+	Properties
+	[
+		{
+			Name "matDiffuse"
+			Type Color4
+			Value [1.0 1.0 1.0 1.0]
+		}
+		
+		{
+			Name "matAmbient"
+			Type Color4
+			Value [1.0 1.0 1.0 1.0]
+		}
+	]
+}

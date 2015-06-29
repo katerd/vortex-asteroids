@@ -7,6 +7,7 @@ namespace asteroids.Components
     public class ShipFiring : ScriptComponent
     {
         private double _lastFireTime;
+
         public bool IsFiring { get; set; }
 
         /// <summary>
@@ -60,6 +61,15 @@ namespace asteroids.Components
             {
                 weaponPort.FireWeapon();
             }
+        }
+
+        public void ApplyFireSpeedPowerup()
+        {
+            Log("Fire speed increased by 50%");
+            FireRate *= 1.5f;
+
+            if (FireRate > 8)
+                FireRate = 8;
         }
     }
 }
