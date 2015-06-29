@@ -39,9 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Hatchet.0.3.3\lib\net45\Hatchet.dll</HintPath>
     </Reference>
-    <Reference Include="Jint">
-      <HintPath>..\..\..\vortex\Externals\Jint.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK">
       <HintPath>..\packages\OpenTKWithOpenAL.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
@@ -57,11 +54,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vortex.Bootstrap, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Vortex.Bootstrap">
       <HintPath>..\..\..\vortex\Vortex.Bootstrap\bin\Debug\Vortex.Bootstrap.dll</HintPath>
     </Reference>
-    <Reference Include="Vortex.Core, Version=1.0.0.36869, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Vortex.Core, Version=1.0.0.34334, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\vortex\Vortex.Core\bin\Debug\Vortex.Core.dll</HintPath>
     </Reference>
@@ -77,8 +73,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\vortex\Vortex.Gui\bin\Debug\Vortex.Gui.dll</HintPath>
     </Reference>
+    <Reference Include="Vortex.Gui.Renderer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\vortex\Vortex.Gui.Renderer\bin\Debug\Vortex.Gui.Renderer.dll</HintPath>
+    </Reference>
     <Reference Include="Vortex.Scenegraph">
       <HintPath>..\..\..\vortex\Vortex.Scenegraph\bin\Debug\Vortex.Scenegraph.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.Scripting">
+      <HintPath>..\..\..\vortex\Vortex.Scripting\bin\Debug\Vortex.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="Vortex.Windows">
       <HintPath>..\..\..\vortex\Vortex.Windows\bin\Debug\Vortex.Windows.dll</HintPath>

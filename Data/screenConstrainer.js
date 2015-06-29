@@ -1,12 +1,12 @@
 var Extents;
 
-function OnUpdate(delta)
+function onUpdate(delta)
 {
-    var vx = Entity.RigidbodyComponent.Velocity.X;
-    var vy = Entity.RigidbodyComponent.Velocity.Y;
+    var vx = entity.RigidbodyComponent.Velocity.X;
+    var vy = entity.RigidbodyComponent.Velocity.Y;
 
-    var x = Entity.LocalPosition.X;
-    var y = Entity.LocalPosition.Y;
+    var x = entity.LocalPosition.X;
+    var y = entity.LocalPosition.Y;
 
     var ex = Extents.X;
     var ey = Extents.Y;
@@ -21,5 +21,5 @@ function OnUpdate(delta)
         vy = -vy;
     }
 
-    Entity.RigidbodyComponent.Velocity = new SlimMath.Vector3(vx, vy, 0);
+    entity.RigidbodyComponent.Velocity = new SlimMath.Vector3(vx, vy, 0);
 }
