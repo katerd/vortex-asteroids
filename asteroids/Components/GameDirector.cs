@@ -1,14 +1,21 @@
-﻿using asteroids.Enums;
+﻿using System.Data.Common;
+using asteroids.Components.Powerups;
+using asteroids.Enums;
 using asteroids.Messaging;
 using asteroids.Spawners;
 using SlimMath;
+using Vortex.Core;
+using Vortex.Core.Extensions;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
+using Vortex.Scenegraph.Components.Gui;
 
 namespace asteroids.Components
 {
     public class GameDirector : ScriptComponent
     {
+        private const float PowerupSpawnChance = 0.1f;
+
         public int LivesRemaining { get; set; }
         public int CurrentLevel { get; private set; }
         public int AsteroidCount { get; private set; }
@@ -40,7 +47,15 @@ namespace asteroids.Components
 
             // create new ones!
             SpawnAsteroids();
-            SpawnPlayer();
+
+            if (level == 1)
+            {
+                SpawnPlayer();
+            }
+            else
+            {
+                ResetPlayer();
+            }
         }
 
         public override void Initialize()
@@ -75,6 +90,8 @@ namespace asteroids.Components
 
         private void HandleAsteroidDestroyed(object messageId, object data)
         {
+            var worldPosition = ((Entity)data).WorldPosition;
+
             Log(string.Format("Asteroid destroyed. count = {0}", AsteroidCount));
 
             AsteroidCount--;
@@ -84,6 +101,20 @@ namespace asteroids.Components
                 Log("Last asteroid destroyed!");
                 InvokeDelayed(DoLevelComplete, 0);
             }
+
+            if (StaticRng.Random.EventHappens(PowerupSpawnChance))
+            {
+                PowerupSpawner.SpawnIn(Scene, worldPosition);
+            }
+
+            var guiRoot = Scene.GetComponent<GuiRootComponent>();
+
+            var powEntity = Scene.CreateEntity("powRoot");
+            guiRoot.Entity.AddChild(powEntity);
+
+            var pow = powEntity.CreateComponent<PowText>();
+            pow.Text = "AN ASTEROID WAS DESTROYED!";
+            powEntity.LocalPosition = CameraComponent.Main.WorldToScreen(worldPosition).AsVector3();
         }
 
         private void HandlePlayerDestroyed(object messageId, object data)
@@ -102,11 +133,25 @@ namespace asteroids.Components
         private void SpawnPlayer()
         {
             // remove old ship, and create a new one.
-            var entity = Scene.GetEntityWithComponent<ShipMovement>();
-            if (entity != null)
-                entity.Destroy();
+            var shipEntity = Scene.GetEntityWithComponent<ShipMovement>();
+            if (shipEntity != null)
+                shipEntity.Destroy();
 
-            ShipSpawner.SpawnIn(Scene, new Vector3(-30, 0, 0));
+            shipEntity = ShipSpawner.SpawnIn(Scene, new Vector3(-30, 0, 0));
+
+            var defence = shipEntity.GetComponentInSelfOrParents<ShipDefence>();
+            defence.MakeImmune();
+        }
+
+        private void ResetPlayer()
+        {
+            var shipMovement = Scene.GetComponent<ShipMovement>();
+            shipMovement.Stop();
+
+            var shipEntity = shipMovement.Entity;
+            shipEntity.LocalPosition = new Vector3(-30, 0, 0);
+            var defence = shipEntity.GetComponentInSelfOrChildren<ShipDefence>();
+            defence.MakeImmune();
         }
 
         private void DoLevelComplete()
@@ -124,11 +169,6 @@ namespace asteroids.Components
         private void DoGameWon()
         {
             GameCompleted = true;
-        }
-
-        public void SpawnPowerup(Scene scene, Vector3 worldPosition)
-        {
-            PowerupSpawner.SpawnIn(Scene, worldPosition);
         }
     }
 }

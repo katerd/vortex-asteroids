@@ -1,3 +1,5 @@
+/// <reference path="scriptDefines.js" />
+
 var Extents;
 
 function onUpdate(delta)

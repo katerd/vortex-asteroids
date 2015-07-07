@@ -1,4 +1,5 @@
-﻿using Vortex.Scenegraph.Components;
+﻿using asteroids.Components.Powerups;
+using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Gui;
 
 namespace asteroids.Components
@@ -26,15 +27,24 @@ namespace asteroids.Components
             if (_gameDirector == null)
                 return;
 
+            UpdateScore();
+            UpdateStatus();
+            UpdateShipHealth();
+            UpdateGameOverText();
+        }
 
-            EaseDisplayedScore();
-            ScoreLabel.Text = string.Format("Score: {0}", _displayedScore);
-
+        private void UpdateStatus()
+        {
             StatusLabel.Text = GetLabelText();
+        }
+
+        private void UpdateShipHealth()
+        {
             ShipHealth.HorizontalCrop = GetShipHealthPercentage();
+        }
 
-            
-
+        private void UpdateGameOverText()
+        {
             GameOverLabel.Visible = false;
             if (_gameDirector.LivesRemaining < 0)
             {
@@ -46,6 +56,12 @@ namespace asteroids.Components
                 GameOverLabel.Visible = true;
                 GameOverLabel.Text = "You're winner!";
             }
+        }
+
+        private void UpdateScore()
+        {
+            EaseDisplayedScore();
+            ScoreLabel.Text = string.Format("Score: {0}", _displayedScore);
         }
 
         private void EaseDisplayedScore()
@@ -96,10 +112,20 @@ namespace asteroids.Components
                 return string.Format("");
             }
 
-            return string.Format("Current level: {1}, asteroids: {0}, lives: {2}", 
+            var powerupText = string.Empty;
+
+            var shipFiring = Scene.GetComponent<ShipFiring>();
+            if (shipFiring != null)
+            {
+                powerupText += string.Format("Fire rate: {0}", shipFiring.FireRate);
+            }
+
+
+            return string.Format("Current level: {1}, asteroids: {0}, lives: {2} {3}", 
                 _gameDirector.AsteroidCount,
                 _gameDirector.CurrentLevel,
-                _gameDirector.LivesRemaining);
+                _gameDirector.LivesRemaining,
+                powerupText);
         }
 
         private bool IsGameOver

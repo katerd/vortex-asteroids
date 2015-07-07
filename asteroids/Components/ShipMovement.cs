@@ -87,6 +87,11 @@ namespace asteroids.Components
             }
         }
 
+        public void Stop()
+        {
+            _movement = new Vector3();
+        }
+
         public override void OnUpdate(float delta)
         {
             base.OnUpdate(delta);

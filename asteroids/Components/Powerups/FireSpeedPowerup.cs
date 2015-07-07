@@ -1,12 +1,14 @@
 ﻿using System;
 using SlimMath;
 using Vortex.Core;
+using Vortex.Core.Extensions;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
+using Vortex.Scenegraph.Components.Gui;
 
-namespace asteroids.Components
+namespace asteroids.Components.Powerups
 {
-    public class FireSpeedPowerup : ScriptComponent
+    public class FireSpeedPowerup : Powerup
     {
         private double _cycle;
         private double _spawnTime;
@@ -18,7 +20,6 @@ namespace asteroids.Components
             base.Initialize();
 
             _spawnTime = Timer.GetTime();
-            
         }
 
         public override void OnTriggerEnter(ColliderComponent other)
@@ -30,10 +31,22 @@ namespace asteroids.Components
             {
                 return;
             }
+            shipFiring.ApplyFireSpeedPowerup();
+
+            SpawnPowerupText();
 
             Entity.Destroy();
-            
-            shipFiring.ApplyFireSpeedPowerup();
+        }
+
+        private void SpawnPowerupText()
+        {
+            var powTextEntity = Scene.CreateEntity();
+            powTextEntity.Parent = Scene.GetEntityWithComponent<GuiRootComponent>();
+            powTextEntity.LocalPosition = CameraComponent.Main.WorldToScreen(Entity.WorldPosition).AsVector3();
+            var component = new PowText();
+            powTextEntity.AddComponent(component);
+            component.Text = "Fire speed increase!";
+            component.TextColour = Colours.Magenta;
         }
 
         public override void OnUpdate(float delta)

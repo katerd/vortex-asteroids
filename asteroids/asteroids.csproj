@@ -90,10 +90,12 @@
   <ItemGroup>
     <Compile Include="AsteroidsWindow.cs" />
     <Compile Include="Components\Asteroid.cs" />
-    <Compile Include="Components\FireSpeedPowerup.cs" />
+    <Compile Include="Components\Powerups\FireSpeedPowerup.cs" />
     <Compile Include="Components\HudController.cs" />
     <Compile Include="Components\KillAfterDuration.cs" />
     <Compile Include="Components\GameDirector.cs" />
+    <Compile Include="Components\Powerups\HealthRegenPowerup.cs" />
+    <Compile Include="Components\PowText.cs" />
     <Compile Include="Components\Projectile.cs" />
     <Compile Include="Components\ScoreKeeper.cs" />
     <Compile Include="Components\ShipDefence.cs" />
@@ -105,7 +107,6 @@
     <Compile Include="ConsoleCommands\LevelCommand.cs" />
     <Compile Include="ConsoleCommands\LivesCommand.cs" />
     <Compile Include="Enums\EventType.cs" />
-    <Compile Include="Extensions\SceneExtensions.cs" />
     <Compile Include="Messaging\MessageDispatcher.cs" />
     <Compile Include="Messaging\MessageHandler.cs" />
     <Compile Include="Messaging\ScriptComponentExtensions.cs" />
@@ -147,6 +148,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Materials\bullet.material">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Materials\shipRegenerating.material">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

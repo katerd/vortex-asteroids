@@ -1,9 +1,10 @@
+/// <reference path="scriptDefines.js" />
+
 var KillTime;
 
-function OnUpdate(delta)
+function onUpdate(delta)
 {
-	if (Vortex.Core.Timer.GetTime() >= KillTime)
-	{
-		Entity.Destroy();
+	if (Vortex.Core.Timer.GetTime() >= KillTime) {
+	    entity.Destroy();
 	}
 }
