@@ -62,7 +62,7 @@ namespace asteroids.Components
                     Log("Critical hit smashes asteroid into a fine mist.");
                 }
 
-                this.Dispatch(EventType.AsteroidDestroyed);
+                this.Dispatch(EventType.AsteroidDestroyed, Entity);
             }
         }
 
@@ -86,12 +86,6 @@ namespace asteroids.Components
                     gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
                 }
             }
-
-            if (StaticRng.Random.NextFloat() > 0.1f)
-            {
-                gameDirector.SpawnPowerup(Scene, Entity.WorldPosition);
-            }
-
         }
     }
 }

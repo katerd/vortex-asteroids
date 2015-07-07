@@ -25,7 +25,7 @@ namespace asteroids.Scenes
             labelEntity.LocalPosition = new Vector3(30, 30, 0);
             labelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
-                component.FontSize = 22;
+                component.FontSize = 16;
             });
             
 
@@ -53,7 +53,7 @@ namespace asteroids.Scenes
             scoreLabelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
                 component.Text = "";
-                component.FontSize = 22;
+                component.FontSize = 16;
                 component.Visible = true;
             });
 

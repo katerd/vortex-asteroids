@@ -10,6 +10,9 @@ namespace asteroids.Components
 
         public bool IsFiring { get; set; }
 
+        public int FireRatePowerupDuration { get; set; }
+        public int DefaultWeaponFireRate { get; set; }
+
         /// <summary>
         /// Rate in shots per second
         /// </summary>
@@ -17,7 +20,9 @@ namespace asteroids.Components
 
         public ShipFiring()
         {
-            FireRate = 2;
+            DefaultWeaponFireRate = 2;
+            FireRatePowerupDuration = 10;
+            FireRate = DefaultWeaponFireRate;
             IsFiring = false;
         }
 
@@ -65,11 +70,13 @@ namespace asteroids.Components
 
         public void ApplyFireSpeedPowerup()
         {
-            Log("Fire speed increased by 50%");
-            FireRate *= 1.5f;
+            Log("Fire speed increased by 1");
+            FireRate += 1;
 
             if (FireRate > 8)
                 FireRate = 8;
+
+            InvokeDelayed((() => FireRate -= 1), FireRatePowerupDuration);
         }
     }
 }

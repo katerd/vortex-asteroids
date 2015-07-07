@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asteroids", "asteroids\asteroids.csproj", "{633E3D45-5C55-48E5-A33D-11565BF4C3C6}"
 EndProject
@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{2FCC
 		Data\bulletMovement.js = Data\bulletMovement.js
 		Data\killAfterDuration.js = Data\killAfterDuration.js
 		Data\screenConstrainer.js = Data\screenConstrainer.js
+		Data\scriptDefines.js = Data\scriptDefines.js
 	EndProjectSection
 EndProject
 Global

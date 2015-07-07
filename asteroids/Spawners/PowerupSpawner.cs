@@ -1,6 +1,8 @@
-﻿using asteroids.Components;
+﻿using asteroids.Components.Powerups;
 using SlimMath;
+using Vortex.Core;
 using Vortex.Core.Assets;
+using Vortex.Core.Extensions;
 using Vortex.Graphics;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
@@ -13,7 +15,7 @@ namespace asteroids.Spawners
         public static void SpawnIn(Scene scene, Vector3 worldPosition)
         {
             var powerup = ColladaUtils.CreateEntity(scene, @"Models\asteroid-small.dae", true);
-            powerup.CreateComponent<FireSpeedPowerup>();
+            powerup.AddComponent(CreateRandomPowerup());
 
             powerup.LocalPosition = worldPosition;
 
@@ -23,6 +25,18 @@ namespace asteroids.Spawners
                 var material = StaticAssetLoader.Get<Material>("Materials/powerup.material");
                 var clone = Material.Clone(material);
                 mesh.Material = clone;
+            }
+        }
+
+        private static Powerup CreateRandomPowerup()
+        {
+            if (StaticRng.Random.NextBool())
+            {
+                return new FireSpeedPowerup();
+            }
+            else
+            {
+                return new HealthRegenPowerup();
             }
         }
     }

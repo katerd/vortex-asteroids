@@ -13,7 +13,7 @@ namespace asteroids.Spawners
 {
     public static class ShipSpawner
     {
-        public static void SpawnIn(Scene scene, Vector3 position)
+        public static Entity SpawnIn(Scene scene, Vector3 position)
         {
             var ship = ColladaUtils.CreateEntity(scene, @"Models\asteroid-spaceship.dae");
             ship.Name = "ship";
@@ -60,6 +60,7 @@ namespace asteroids.Spawners
                 component.Properties.Extents = new Vector3(40, 30, 0);
             });
 
+            return ship;
 
         }
     }
