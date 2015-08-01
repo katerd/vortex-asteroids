@@ -7,9 +7,11 @@
 			Name "DirectionalLight"
 			Text ![
 			
-				float lt = dot(-_lightWorldVector.xyz, gl_Normal.xyz);
+				vec3 normal = normalize(mat3(_normalMatrix) * gl_Normal);
+			
+				float lt = dot(normal, _lightWorldViewVector.xyz);
 				lt *= _lightIntensity;
-
+				
 				vec3 diffuseRGB = gl_Color.rgb * matDiffuse.rgb * _lightColour.rgb * lt;
 				gl_FrontColor.a = matDiffuse.a * gl_Color.a;
 			
@@ -22,15 +24,18 @@
 			Name "PointLight"
 			Text ![
 			
-				vec3 worldPos = _world + gl_Vertex.xyz;
-				float dist = length(worldPos - _lightWorldVector.xyz);
-				float radis = dist / _lightRadius;
+				vec3 normal = normalize(mat3(_normalMatrix) * gl_Normal);
 				
-				float attenuation = clamp((1 / (radis))-1, 0.0, 1.0);
+				vec4 eyeCoords = _modelView * gl_Vertex;
+			
+				vec3 s = normalize(_lightWorldViewVector.xyz - eyeCoords.xyz);
+				float dist = distance(_lightWorldViewVector.xyz, eyeCoords.xyz);
 				
-				vec3 dtl = normalize(_lightWorldVector.xyz - worldPos);
-				float lt = clamp(dot(gl_Normal.xyz, dtl), 0.0, 1.0);
-				lt *= _lightIntensity;
+				float attenuation = 0;
+				attenuation = clamp(1.0 - dist*dist/(_lightRadius*_lightRadius), 0.0, 1.0); 
+				attenuation *= attenuation;
+				
+				float lt = max(dot(s, normal), 0.0);
 			
 			]!
 		}
@@ -51,8 +56,9 @@
 
                 uniform mat4 _modelViewProjection;
                 uniform mat4 _modelView;
+				uniform mat4 _normalMatrix;
 				uniform vec3 _world;
-                uniform vec4 _lightWorldVector;
+                uniform vec4 _lightWorldViewVector;
                 uniform vec4 _lightColour;
                 uniform float _lightIntensity;
                 uniform float _lightRadius;
@@ -113,8 +119,9 @@
 
                 uniform mat4 _modelViewProjection;
                 uniform mat4 _modelView;
+				uniform mat4 _normalMatrix;
 				uniform vec3 _world;
-                uniform vec4 _lightWorldVector;
+                uniform vec4 _lightWorldViewVector;
                 uniform vec4 _lightColour;
                 uniform float _lightIntensity;
                 uniform float _lightRadius;

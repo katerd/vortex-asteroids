@@ -35,19 +35,18 @@ namespace asteroids.Spawners
 
             var weaponPort = scene.CreateEntity();
             weaponPort.Parent = mesh.Entity;
-            //weaponPort.LocalPosition = new Vector3(-radius, 0, 0);
+            weaponPort.LocalPosition = new Vector3(-radius, 0, 0);
             weaponPort.CreateComponent<WeaponPort>();
 
-            var lightAttachPoint = scene.CreateEntity();
+            var lightAttachPoint = scene.CreateEntity("light", ship);
             lightAttachPoint.CreateComponent<LightComponent>(component =>
             {
-                component.Colour = new Color4(1.0f, 0.8f, 0.5f, 0.5f);
-                component.Intensity = 0.8f;
-                component.Range = 196.0f;
+                component.Colour = new Color4(1.0f, 0.8f, 1.0f, 0.5f);
+                component.Intensity = 2f;
+                component.Range = 64.0f;
                 component.LightType = LightType.Point;
             });
             lightAttachPoint.LocalPosition = new Vector3(radius, 0, 0);
-            ship.AddChild(lightAttachPoint);
 
             ship.CreateComponent<ShipMovement>();
             ship.CreateComponent<ShipFiring>();

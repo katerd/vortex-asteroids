@@ -10,6 +10,7 @@ namespace asteroids
         {
             var startupAttributes = new StartupAttributes
             {
+                AllowResize = true,
                 Height = 600,                       // Height in pixels
                 Width = 800,                        // Width in pixels
                 RenderFrequency = 60,              // Render frequency in frames per second
