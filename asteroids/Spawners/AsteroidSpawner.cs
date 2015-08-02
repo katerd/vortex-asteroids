@@ -76,11 +76,11 @@ namespace asteroids.Spawners
             switch (size)
             {
                 case 3:
-                    return @"Models\asteroid-large.dae";
+                    return @"Models\asteroid-large-textured.dae";
                 case 2:
-                    return @"Models\asteroid-medium.dae";
+                    return @"Models\asteroid-medium-textured.dae";
                 case 1:
-                    return @"Models\asteroid-small.dae";
+                    return @"Models\asteroid-small-textured.dae";
                 default:
                     throw new Exception(string.Format("Unknown asteroid size {0}", size));
             }

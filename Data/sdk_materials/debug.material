@@ -1,0 +1,4 @@
+{
+	Name "Debug"
+	Shader "sdk_shaders/vertexColour.shader"
+}
