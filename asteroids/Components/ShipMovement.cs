@@ -109,9 +109,9 @@ namespace asteroids.Components
             }
             _rotateDirection *= (1 - TurnDamping);
             _rotateDirection += rotateImpulse;
-            Entity.LocalRotation += new Vector3(0, 0, _rotateDirection);
+            Entity.TransformComponent.LocalRotation += new Vector3(0, 0, _rotateDirection);
 
-            var v = Vector3.Transform(new Vector3(1.0f, 0, 0), Entity.LocalRotationMatrix).AsVector3();
+            var v = Vector3.Transform(new Vector3(1.0f, 0, 0), Entity.TransformComponent.LocalRotationMatrix).AsVector3();
 
             var movementImpulse = 0f;
             if (_upKeyDown)

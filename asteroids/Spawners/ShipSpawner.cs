@@ -18,7 +18,7 @@ namespace asteroids.Spawners
             var ship = ColladaUtils.CreateEntity(scene, @"Models\asteroid-spaceship.dae");
             ship.Name = "ship";
 
-            ship.LocalPosition = position;
+            ship.TransformComponent.LocalPosition = position;
 
             ship.CreateComponent<RigidbodyComponent>(component =>
             {
@@ -35,7 +35,7 @@ namespace asteroids.Spawners
 
             var weaponPort = scene.CreateEntity();
             weaponPort.Parent = mesh.Entity;
-            weaponPort.LocalPosition = new Vector3(-radius, 0, 0);
+            weaponPort.TransformComponent.LocalPosition = new Vector3(-radius, 0, 0);
             weaponPort.CreateComponent<WeaponPort>();
 
             var lightAttachPoint = scene.CreateEntity("light", ship);
@@ -46,7 +46,7 @@ namespace asteroids.Spawners
                 component.Range = 64.0f;
                 component.LightType = LightType.Point;
             });
-            lightAttachPoint.LocalPosition = new Vector3(radius, 0, 0);
+            lightAttachPoint.TransformComponent.LocalPosition = new Vector3(radius, 0, 0);
 
             ship.CreateComponent<ShipMovement>();
             ship.CreateComponent<ShipFiring>();

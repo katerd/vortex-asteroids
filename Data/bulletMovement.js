@@ -7,8 +7,8 @@ var MovementSpeed = 0;
 function onUpdate(delta) {
 
     var mv = SlimMath.Vector3.Add(
-        entity.LocalPosition,
+        entity.TransformComponent.LocalPosition,
         SlimMath.Vector3.Multiply(MovementVector, MovementSpeed * delta));
 
-    entity.LocalPosition = mv;
+    entity.TransformComponent.LocalPosition = mv;
 }

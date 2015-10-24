@@ -76,14 +76,14 @@ namespace asteroids.Components
             {
                 for (var i = 0; i < 3; i++)
                 {
-                    gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
+                    gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.TransformComponent.WorldPosition);
                 }
             }
             else if (Size == 2)
             {
                 for (var i = 0; i < 2; i++)
                 {
-                    gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.WorldPosition);
+                    gameDirector.SpawnAsteroid(Scene, Size - 1, Entity.TransformComponent.WorldPosition);
                 }
             }
         }

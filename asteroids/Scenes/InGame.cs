@@ -22,7 +22,7 @@ namespace asteroids.Scenes
 
             // ---- Progress Status Text
             var labelEntity = scene.CreateEntity("label_entity", hudControllerEntity);
-            labelEntity.LocalPosition = new Vector3(30, 30, 0);
+            labelEntity.TransformComponent.LocalPosition = new Vector3(30, 30, 0);
             labelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
                 component.FontSize = 16;
@@ -31,7 +31,7 @@ namespace asteroids.Scenes
 
             // ---- Ship Health Bar
             var shipHealthEntity = scene.CreateEntity("shiphealth_entity", hudControllerEntity);
-            shipHealthEntity.LocalPosition = new Vector3(450, 10, 0);
+            shipHealthEntity.TransformComponent.LocalPosition = new Vector3(450, 10, 0);
             shipHealthEntity.CreateComponent<ImageWidgetComponent>(component =>
             {
                 component.ImageName = "Textures/healthbar.png";
@@ -40,7 +40,7 @@ namespace asteroids.Scenes
 
             // ---- Game Over Label
             var gameEndLabelEntity = scene.CreateEntity("gameover_entity", hudControllerEntity);
-            gameEndLabelEntity.LocalPosition = new Vector3(270, 270, 0);
+            gameEndLabelEntity.TransformComponent.LocalPosition = new Vector3(270, 270, 0);
             gameEndLabelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
                 component.Text = "";
@@ -49,7 +49,7 @@ namespace asteroids.Scenes
             });
 
             var scoreLabelEntity = scene.CreateEntity("score_entity", hudControllerEntity);
-            scoreLabelEntity.LocalPosition = new Vector3(450, 30, 0);
+            scoreLabelEntity.TransformComponent.LocalPosition = new Vector3(450, 30, 0);
             scoreLabelEntity.CreateComponent<LabelWidgetComponent>(component =>
             {
                 component.Text = "";
@@ -66,14 +66,9 @@ namespace asteroids.Scenes
                 component.ScoreLabel = scene.GetEntityByName("score_entity").GetComponent<LabelWidgetComponent>();
             });
 
-
-
-            var camera = scene.CreateEntity("camera");
-
-            camera.CreateComponent<CameraComponent>(component =>
-            {
-                CameraComponent.Main.Zoom = 80;
-            });
+            // get default camera
+            var camera = scene.GetComponent<CameraComponent>();
+            camera.Zoom = 80;
         }
     }
 }

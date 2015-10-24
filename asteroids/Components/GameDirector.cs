@@ -90,7 +90,7 @@ namespace asteroids.Components
 
         private void HandleAsteroidDestroyed(object messageId, object data)
         {
-            var worldPosition = ((Entity)data).WorldPosition;
+            var worldPosition = ((Entity)data).TransformComponent.WorldPosition;
 
             Log(string.Format("Asteroid destroyed. count = {0}", AsteroidCount));
 
@@ -114,7 +114,7 @@ namespace asteroids.Components
 
             var pow = powEntity.CreateComponent<PowText>();
             pow.Text = "AN ASTEROID WAS DESTROYED!";
-            powEntity.LocalPosition = CameraComponent.Main.WorldToScreen(worldPosition).AsVector3();
+            powEntity.TransformComponent.LocalPosition = CameraComponent.Main.WorldToScreen(worldPosition).AsVector3();
         }
 
         private void HandlePlayerDestroyed(object messageId, object data)
@@ -149,7 +149,7 @@ namespace asteroids.Components
             shipMovement.Stop();
 
             var shipEntity = shipMovement.Entity;
-            shipEntity.LocalPosition = new Vector3(-30, 0, 0);
+            shipEntity.TransformComponent.LocalPosition = new Vector3(-30, 0, 0);
             var defence = shipEntity.GetComponentInSelfOrChildren<ShipDefence>();
             defence.MakeImmune();
         }

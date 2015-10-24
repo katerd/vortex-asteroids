@@ -5,6 +5,7 @@ using Vortex.Core;
 using Vortex.Core.Assets;
 using Vortex.Core.Collision;
 using Vortex.Core.Extensions;
+using Vortex.Graphics;
 using Vortex.Scenegraph;
 using Vortex.Scenegraph.Components;
 using Vortex.Scenegraph.Components.Collision;
@@ -45,7 +46,8 @@ namespace asteroids.Spawners
             }
 
             var asteroid = ColladaUtils.CreateEntity(scene, GetModelFilename(size), true);
-            asteroid.LocalPosition = worldPosition;
+
+            asteroid.TransformComponent.LocalPosition = worldPosition;
 
             asteroid.CreateComponent<Asteroid>(destructible =>
             {

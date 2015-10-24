@@ -42,7 +42,7 @@ namespace asteroids.Components.Powerups
         {
             var powTextEntity = Scene.CreateEntity();
             powTextEntity.Parent = Scene.GetEntityWithComponent<GuiRootComponent>();
-            powTextEntity.LocalPosition = CameraComponent.Main.WorldToScreen(Entity.WorldPosition).AsVector3();
+            powTextEntity.TransformComponent.LocalPosition = CameraComponent.Main.WorldToScreen(Entity.TransformComponent.WorldPosition).AsVector3();
             var component = new PowText();
             powTextEntity.AddComponent(component);
             component.Text = "Fire speed increase!";

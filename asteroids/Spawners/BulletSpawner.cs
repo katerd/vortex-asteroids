@@ -30,7 +30,7 @@ namespace asteroids.Spawners
                 sphere.Radius *= 8.0f;
             }
 
-            bullet.LocalPosition = position;
+            bullet.TransformComponent.LocalPosition = position;
 
             bullet.CreateComponent<JsScriptComponent>(component =>
             {

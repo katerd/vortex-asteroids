@@ -21,7 +21,7 @@ namespace asteroids.Components
             if (ship == null)
                 return;
 
-            Entity.LocalPosition = Vector3.Lerp(ship.LocalPosition, Entity.LocalPosition, delta * 1.5f);
+            Entity.TransformComponent.LocalPosition = Vector3.Lerp(ship.TransformComponent.LocalPosition, Entity.TransformComponent.LocalPosition, delta * 1.5f);
         }
     }
 }

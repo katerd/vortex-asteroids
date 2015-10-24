@@ -49,8 +49,8 @@ namespace asteroids.Components
         private void SpawnBullet()
         {
             var parent = Entity.GetComponentInSelfOrParents<ShipFiring>().Entity;
-            var angle = -parent.LocalRotation.Z;
-            var position = Entity.WorldPosition;
+            var angle = -parent.TransformComponent.LocalRotation.Z;
+            var position = Entity.TransformComponent.WorldPosition;
 
             BulletSpawner.SpawnIn(Scene, position, angle, BulletLife, BulletSpeed, Damage);
 

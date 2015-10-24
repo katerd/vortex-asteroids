@@ -7,8 +7,8 @@ function onUpdate(delta)
     var vx = entity.RigidbodyComponent.Velocity.X;
     var vy = entity.RigidbodyComponent.Velocity.Y;
 
-    var x = entity.LocalPosition.X;
-    var y = entity.LocalPosition.Y;
+    var x = entity.TransformComponent.LocalPosition.X;
+    var y = entity.TransformComponent.LocalPosition.Y;
 
     var ex = Extents.X;
     var ey = Extents.Y;

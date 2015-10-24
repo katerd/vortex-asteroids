@@ -17,7 +17,7 @@ namespace asteroids.Spawners
             var powerup = ColladaUtils.CreateEntity(scene, @"Models\asteroid-small.dae", true);
             powerup.AddComponent(CreateRandomPowerup());
 
-            powerup.LocalPosition = worldPosition;
+            powerup.TransformComponent.LocalPosition = worldPosition;
 
             var meshes = powerup.GetComponentsInSelfOrChildren<MeshComponent>();
             foreach (var mesh in meshes)

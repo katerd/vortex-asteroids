@@ -45,6 +45,12 @@ SlimMath.Vector3.Multiply = function (a, b) {
 }
 
 function RigidbodyComponent() {
+
+    /// <field>Local position.</field>
+    this.LocalPosition = new SlimMath.Vector3();
+}
+
+function TransformComponent() {
     
 }
 
@@ -58,8 +64,9 @@ function Entity() {
     /// <field>Rigidbody.</field>
     this.RigidbodyComponent = new RigidbodyComponent();
 
-    /// <field>Local position.</field>
-    this.LocalPosition = new SlimMath.Vector3();
+    this.TransformComponent = new TransformComponent();
+
+    
 }
 
 var entity = new Entity();
